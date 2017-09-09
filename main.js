@@ -36,22 +36,23 @@ var masterLockDecoder = {
 		 *								 (again). MAGIC!
 		 */
 
-		this.thirdDigitOfCombination = this.thirdCombinationDigitPossibilities[this.choosenThirdDigit-1];
+		if (this.choosenThirdDigit){
+			this.thirdDigitOfCombination = this.thirdCombinationDigitPossibilities[this.choosenThirdDigit-1];
+		}
+
 		var intermediateCalculation = (this.modulo + 2) % 4;
 		var step;
 
 		for (var i = 0; i < 10; i++) {
 			step = intermediateCalculation + (4 * i);
-			condition0 = !this.choosenThirdDigit;
-			condition1 = (this.thirdDigitOfCombination + 2) % 40 != step;
-			condition2 = (this.thirdDigitOfCombination - 2) % 40 != step;
 
 			// When the number is choosen it depends on condition1 and condition2
 			// When the number is not choosen it always get filled
-			if (condition0 || (condition1 && condition2) {
+			if (!this.choosenThirdDigit || ((this.thirdDigitOfCombination + 2) % 40 != step && (this.thirdDigitOfCombination - 2) % 40 != step)) {
 				this.secondCombinationDigitPossibilities.push(step);
 			}
 		}
+
 		tmp = this.secondCombinationDigitPossibilities.join(', ')
 		this.setSecondCombinationDigit(tmp)
 	},
